@@ -7,6 +7,7 @@ copy /Y ver.bat C:\SakuraPC\Systems\GPT\OneOS\Storage\etc
 cd ..
 cd ..
 del NowUpdate.tmp
+echo.
 echo «ö¥ô·NÁäÄ~Äò
 pause >nul
 del ver.bat
