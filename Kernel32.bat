@@ -82,9 +82,16 @@ echo ==============================
 echo.
 call infokey.bat
 set /p activation=產品金鑰(沒有請輸入skip): 
-if %activation% == %key1% goto activationedhome
-if %activation% == %key2% goto activationedpro
-if %activation% == %key3% goto activationedpro
+if %key% == %key1% goto activationedbasic
+if %key% == %key2% goto activationedbasic
+if %key% == %key3% goto activationedbasic
+if %key% == %key4% goto activationedbasic
+if %key% == %key5% goto activationedbasic
+if %key% == %key6% goto activationedpro
+if %key% == %key7% goto activationedpro
+if %key% == %key8% goto activationedpro
+if %key% == %key9% goto activationedpro
+if %key% == %key10% goto activationedpro
 if %activation% == skip goto skip
 Start ActivationErr.vbs
 goto activation
@@ -102,8 +109,8 @@ echo set copyorno=此產品是正版 >> info.bat
 Start ActivationDone.vbs
 goto reset
 
-:activationedhome
-echo set keys=已啟用OS，Home版 >> info.bat
+:activationedbasic
+echo set keys=已啟用OS，Basic版 >> info.bat
 echo home > home.bat
 echo set copyorno=此產品是正版 >> info.bat
 Start ActivationDone.vbs
