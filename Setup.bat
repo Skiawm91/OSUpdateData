@@ -8,8 +8,8 @@ cd ..
 cd ..
 del NowUpdate.tmp
 echo.
-echo «ö¥ô·NÁäÄ~Äò
 pause >nul
 del ver.bat
 start Kernel32.bat
+exit
 
