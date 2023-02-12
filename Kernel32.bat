@@ -337,8 +337,7 @@ goto startmenugif
 :installupdate
 cls
 cd SoftwareUpdate
-call temp.bat
-cd %rnd%
+cd UpdateData
 start Setup.bat
 exit
 
