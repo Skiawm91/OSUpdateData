@@ -21,7 +21,7 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo.%taskbar%
+echo :start:                 %date%:
 set /p comand= 
 IF %comand% == 1 goto system
 IF %comand% == 2 goto theme
@@ -43,7 +43,7 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo.%taskbar%
+echo :start:                 %date%:
 set /p comand=
 if %comand% == 1 goto bootmgr
 if %comand% == 2 goto setgui
@@ -67,19 +67,19 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo.%taskbar%
+echo :start:                 %date%:
 set /p comand=
-if %comand% == 1 goto verprolod
+if %comand% == 1 goto verlod
 if %comand% == - goto cpmenu
 IF %comand% == x goto cpexit
 goto system
 
 :verlod
 cd ..\..\etc
-if EXIST basic.bat (goto lod2) else (goto verprolod2)
+if EXIST basic.bat (goto lod2) else (goto verlod2)
 
 :verlod2
-if EXIST basic.bat (goto lod2) else (goto cantuse)
+if EXIST pro.bat (goto lod2) else (goto cantuse)
 
 :lod2
 cls
@@ -96,7 +96,7 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo.%taskbar%
+echo :start:                 %date%:
 set /p lod=
 if %lod% == 1 goto light
 if %lod% == 2 goto dark
@@ -111,7 +111,7 @@ timeout /t 1 >nul 2 >nul
 call infothemelod.bat
 cd ..\OneOS\System32
 color %themelod%
-goto lod
+goto lod2
 
 :dark
 cd ..\..\etc
@@ -120,7 +120,7 @@ timeout /t 1 >nul 2 >nul
 call infothemelod.bat
 cd ..\OneOS\System32
 color %themelod%
-goto lod
+goto lod2
 
 :bootmgr
 cd ..\..\..\..\EFIStorage\profile
@@ -129,33 +129,21 @@ goto mgr
 :setgui
 cls
 echo ========================================
-echo : 設定 - 系統 - 設定GUI              :x:
+echo : 設定 - 系統 - 悲傷的哀號           :x:
 echo ========================================
-echo :[-]＜－                               :
-echo :         設定 - 系統 - 設定GUI        :
-echo :                                      :
-echo :                [1] 啟用              :
-echo :                [2] 禁用              :
 echo :                                      :
 echo :                                      :
-echo :             看起來像這樣             :
+echo :                                      :
+echo :                                      :
+echo :   現在此BETA功能以內置，無法再使用   :
+echo :                                      :
+echo :                                      :
+echo :                                      :
 echo :                                      :
 echo ========================================
-echo :start:    %date%；%time%:
-set /p gui=
-if %gui% == 1 goto setguit
-if %gui% == 2 goto setguif
-if %gui% == - goto system
-if %gui% == x goto cpexit
-goto setgui
-
-:setguit
-cd ..\..\etc
-echo set taskbar=:start:    %date%；%time%: > GUI.bat
-call gui.bat
-cd ..\OneOS\System32
-timeout /t 1 >nul 2 >nul
-goto setgui
+echo :start:                 %date%:
+pause > nul
+goto system
 
 :setguif
 cd ..\..\etc
@@ -178,7 +166,7 @@ echo :           [3] 關閉預設開啟BootMGR    :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo.%taskbar%
+echo :start:                 %date%:
 if %comand% == 1 goto delall
 if %comand% == 2 goto delauto
 if %comand% == 3 goto setos
@@ -203,7 +191,7 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo.%taskbar%
+echo :start:                 %date%:
 timeout /t 2 >nul
 goto mgr
 
@@ -222,7 +210,7 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo.%taskbar%
+echo :start:                 %date%:
 timeout /t 2 >nul
 goto mgr
 
@@ -267,6 +255,42 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
+echo :start:                 %date%:
+if EXIST logindev (goto updated) else (goto bcheck)
+
+:bcheck
+cls
+echo ========================================
+echo : 設定 - 系統 - OneOS Update         :x:
+echo ========================================
+echo :                                      :
+echo :                                      :
+echo :                                      :
+echo :             正在檢查更新             :
+echo :                                      :
+echo :                                      :
+echo :                                      :
+echo :                                      :
+echo ========================================
+echo :start:                 %date%:
+if EXIST loginbeta (goto updateb) else (goto pvcheck)
+
+:pvcheck
+cls
+echo ========================================
+echo : 設定 - 系統 - OneOS Update         :x:
+echo ========================================
+echo :                                      :
+echo :                                      :
+echo :                                      :
+echo :             正在檢查更新             :
+echo :                                      :
+echo :                                      :
+echo :                                      :
+echo :                                      :
+echo ========================================
+echo :start:                 %date%:
+if EXIST loginpv (goto updatepv) else (goto updates)
 
 :updates
 timeout /t 4 >nul 2>nul
@@ -283,12 +307,24 @@ if EXIST %ver% (goto noupdate) else (goto scupdate)
 :updatepv
 timeout /t 4 >nul 2>nul
 cd temp
-echo set rnd=update%random%%random% > rnd.bat
+echo set rnd=updatepv%random%%random% > rnd.bat
 call rnd.bat
 cls
 md %rnd%
 cd %rnd%
 git clone https://github.com/Swarmed2674/PVUpdateInfo.git
+cd UpdateInfo
+if EXIST %ver% (goto noupdate) else (goto cupdatepv)
+
+:updated
+timeout /t 4 >nul 2>nul
+cd temp
+echo set rnd=updated%random%%random% > rnd.bat
+call rnd.bat
+cls
+md %rnd%
+cd %rnd%
+git clone https://github.com/Swarmed2674/DUpdateInfo.git
 cd UpdateInfo
 if EXIST %ver% (goto noupdate) else (goto cupdate)
 
@@ -306,8 +342,8 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo.%taskbar%
-pause > nul
+echo :start:                 %date%:
+pause >nul
 goto system
 
 :scupdate
@@ -324,7 +360,7 @@ echo :        是否立即安裝更新(Y/N)?        :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo.%taskbar%
+echo :start:                 %date%:
 set /p uw=
 if %uw% == Y goto installnew
 if %uw% == N goto noupdate
@@ -345,7 +381,7 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo %taskbar%
+echo :start:                 %date%:
 timeout /t 5 >nul 2>nul
 cd ..
 cd ..
@@ -367,7 +403,7 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo %taskbar%
+echo :start:                 %date%:
 timeout /t 10 >nul 2>nul
 cd ..
 cd ..
@@ -387,8 +423,7 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo %taskbar%
-echo.
+echo :start:                 %date%:echo.
 pause
 goto theme
 

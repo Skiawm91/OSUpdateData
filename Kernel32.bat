@@ -82,16 +82,16 @@ echo ==============================
 echo.
 call infokey.bat
 set /p activation=產品金鑰(沒有請輸入skip): 
-if %key% == %key1% goto activationedbasic
-if %key% == %key2% goto activationedbasic
-if %key% == %key3% goto activationedbasic
-if %key% == %key4% goto activationedbasic
-if %key% == %key5% goto activationedbasic
-if %key% == %key6% goto activationedpro
-if %key% == %key7% goto activationedpro
-if %key% == %key8% goto activationedpro
-if %key% == %key9% goto activationedpro
-if %key% == %key10% goto activationedpro
+if %activation% == %key1% goto activationedbasic
+if %activation% == %key2% goto activationedbasic
+if %activation% == %key3% goto activationedbasic
+if %activation% == %key4% goto activationedbasic
+if %activation% == %key5% goto activationedbasic
+if %activation% == %key6% goto activationedpro
+if %activation% == %key7% goto activationedpro
+if %activation% == %key8% goto activationedpro
+if %activation% == %key9% goto activationedpro
+if %activation% == %key10% goto activationedpro
 if %activation% == skip goto skip
 Start ActivationErr.vbs
 goto activation
@@ -355,14 +355,14 @@ echo.
 echo.
 echo.
 echo.
-echo.
+echo.       如果指令輸錯，請按Enter繼續
 echo.
 echo. 
 echo.
-echo.
-echo.
+echo.                     通道: %osdata%
+echo.                     OneOS版本:%ver2%
 echo ========================================
-echo.%taskbar%
+echo :start:                 %date%:
 set /p comand=
 if %comand% == start goto startmenugif
 if %comand% == help goto help 
@@ -383,11 +383,14 @@ if %comand% == calc goto calc
 if %comand% == off goto poweroff
 if %comand% == reset goto powereset
 if %comand% == internet goto internet
+if %comand% == cmd goto command
 echo.
 echo 沒有這個指令！使用 [help]或者[start] 取得指令！
+pause >nul
 goto comand
 
 :startmenugif
+color %themelod%
 ehco.
 cls
 echo 開始===[off]=[reset]=[logoutuser]========
@@ -432,7 +435,7 @@ echo.                                 :輸入's:
 echo.[5]        [6]         [7]       :tart',:
 echo.[desktop] [sexplorer] [gpuboost] :回到桌:
 echo.                                 :面，或:
-echo.                                 :者輸入: 
+echo.[8]                              :者輸入: 
 cls
 echo.[1]    [2]      [3]    [4]       : help :
 echo.[help] [pcinfo] [calc] [settings]:      :
@@ -440,8 +443,8 @@ echo.                                 :輸入's:
 echo.[5]        [6]         [7]       :tart',:
 echo.[desktop] [sexplorer] [gpuboost] :回到桌:
 echo.                                 :面，或:
-echo.                                 :者輸入: 
-echo.                                 :'deskt:
+echo.[8]                              :者輸入: 
+echo.[Command Mode]                   :'deskt:
 cls
 echo 開始===[off]=[reset]=[logoutuser]========
 echo.[1]    [2]      [3]    [4]       : help :
@@ -450,8 +453,8 @@ echo.                                 :輸入's:
 echo.[5]        [6]         [7]       :tart',:
 echo.[desktop] [sexplorer] [gpuboost] :回到桌:
 echo.                                 :面，或:
-echo.                                 :者輸入: 
-echo.                                 :'deskt:
+echo.[8]                              :者輸入: 
+echo.[Command Mode]                   :'deskt:
 echo.                                 :op' 返:
 cls
 echo 開始===[off]=[reset]=[logoutuser]========
@@ -461,8 +464,8 @@ echo.                                 :輸入's:
 echo.[5]        [6]         [7]       :tart',:
 echo.[desktop] [sexplorer] [gpuboost] :回到桌:
 echo.                                 :面，或:
-echo.                                 :者輸入: 
-echo.                                 :'deskt:
+echo.[8]                              :者輸入: 
+echo.[Command Mode]                   :'deskt:
 echo.                                 :op' 返:
 echo.                                 :回桌面:
 cls
@@ -473,32 +476,32 @@ echo.                                 :輸入's:
 echo.[5]        [6]         [7]       :tart',:
 echo.[desktop] [sexplorer] [gpuboost] :回到桌:
 echo.                                 :面，或:
-echo.                                 :者輸入: 
-echo.                                 :'deskt:
+echo.[8]                              :者輸入: 
+echo.[Command Mode]                   :'deskt:
 echo.                                 :op' 返:
 echo.                                 :回桌面:
 echo.                          [down] :      : 
 cls
 echo 開始===[off]=[reset]=[logoutuser]========
 echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
+echo.[Help] [PCinfo] [Calc] [Settings]:      :
 echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-echo.[desktop] [sexplorer] [gpuboost] :回到桌:
+echo.[5]       [6]         [7]        :tart',:
+echo.[Desktop] [SExplorer] [GPUBoost] :回到桌:
 echo.                                 :面，或:
-echo.                                 :者輸入: 
-echo.                                 :'deskt:
+echo.[8]                              :者輸入: 
+echo.[Command Mode]                   :'deskt:
 echo.                                 :op' 返:
 echo.                                 :回桌面:
 echo.                          [down] :      : 
 echo =========================================
 set /p comand=
 if %comand% == start goto comand
-if %comand% == desktop goto comand
-if %comand% == help goto help 
+if %comand% == 5 goto comand
+if %comand% == 1 goto help 
 if %comand% == logoutuser goto usrlogoff
 if %comand% == time goto time
-if %comand% == pcinfo goto thispc
+if %comand% == 2 goto thispc
 if %comand% == time goto time
 if %comand% == activation goto yactivation
 if %comand% == userinfo goto usrinfo
@@ -506,33 +509,63 @@ if %comand% == useradd goto usradd
 if %comand% == drivemgr goto drivemgr
 if %comand% == unitro goto nitro
 if %comand% == notepad goto notepad
-if %comand% == sexplorer goto intexp
-if %comand% == gpuboost goto gbmc
-if %comand% == settings goto cp
-if %comand% == calc goto calc
+if %comand% == 6 goto intexp
+if %comand% == 7 goto gbmc
+if %comand% == 4 goto cp
+if %comand% == 3 goto calc
 if %comand% == off goto poweroff
 if %comand% == reset goto powereset
 if %comand% == internet goto internet
+if %comand% == 8 goto command
 goto startmenu
 
 :startmenu
 cls
 echo 開始===[off]=[reset]=[logoutuser]========
 echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
+echo.[Help] [PCinfo] [Calc] [Settings]:      :
 echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-echo.[desktop] [sexplorer] [gpuboost] :回到桌:
+echo.[5]       [6]         [7]        :tart',:
+echo.[Desktop] [SExplorer] [GPUBoost] :回到桌:
 echo.                                 :面，或:
-echo.                                 :者輸入: 
-echo.                                 :'deskt:
+echo.[8]                              :者輸入: 
+echo.[Command Mode]                   :'deskt:
 echo.                                 :op' 返:
 echo.                                 :回桌面:
 echo.                          [down] :      : 
 echo =========================================
 set /p comand=
 if %comand% == start goto comand
-if %comand% == desktop goto comand
+if %comand% == 5 goto comand
+if %comand% == 1 goto help 
+if %comand% == logoutuser goto usrlogoff
+if %comand% == time goto time
+if %comand% == 2 goto thispc
+if %comand% == time goto time
+if %comand% == activation goto yactivation
+if %comand% == userinfo goto usrinfo
+if %comand% == useradd goto usradd
+if %comand% == drivemgr goto drivemgr
+if %comand% == unitro goto nitro
+if %comand% == notepad goto notepad
+if %comand% == 6 goto intexp
+if %comand% == 7 goto gbmc
+if %comand% == 4 goto cp
+if %comand% == 3 goto calc
+if %comand% == off goto poweroff
+if %comand% == reset goto powereset
+if %comand% == internet goto internet
+if %comand% == 8 goto command
+goto startmenu
+
+:command
+color 0a
+cls
+title OneOS (Command Mode)
+echo 輸入 [help] 取得幫助
+echo.
+set /p comand=OneOS= 
+if %comand% == exit goto startmenugif
 if %comand% == help goto help 
 if %comand% == logoutuser goto usrlogoff
 if %comand% == time goto time
@@ -551,7 +584,7 @@ if %comand% == calc goto calc
 if %comand% == off goto poweroff
 if %comand% == reset goto powereset
 if %comand% == internet goto internet
-goto startmenu
+goto command
 
 ::=======================================================Systems
 
