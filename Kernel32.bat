@@ -331,7 +331,16 @@ goto usrpasswd
 CD ..\OneOS\System32
 if EXIST NowUpdate.tmp (goto installupdate)
 if EXIST UpdateDone.tmp (goto delinstallfile)
-start Wellcome.vbs
+goto login
+
+:login
+cls
+call Button 5 5 F0 "Login" X _Var_Box _Var_Hover
+GetInput /M %_Var_Box% /H %_Var_Hover%
+echo.
+echo.
+echo.
+echo.
 goto startmenugif
 
 :installupdate
@@ -342,9 +351,10 @@ start Setup.bat
 exit
 
 :delinstallfile
-del /F /Q SoftwareUpdate
-rmdir SoftwareUpdate
-md SoftwareUpdate
+cd SoftwareUpdate
+del /F /Q UpdateData
+rmdir UpdateData
+cd ..
 del /F /Q UpdateDone.tmp
 goto powereset
 
@@ -360,7 +370,7 @@ echo.
 echo. 
 echo.
 echo.                     通道: %osdata%
-echo.                     OneOS版本:%ver2%
+echo.                     OneOS版本: %ver2%
 echo ========================================
 echo :start:                 %date%:
 set /p comand=
