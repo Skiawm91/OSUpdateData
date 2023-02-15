@@ -351,12 +351,10 @@ start Setup.bat
 exit
 
 :delinstallfile
-cd SoftwareUpdate
-del /F /Q UpdateData
-rmdir UpdateData
-cd ..
+rmdir /S /Q SoftwareUpdate
+md SoftwareUpdate
 del /F /Q UpdateDone.tmp
-goto powereset
+goto loginmenu
 
 :comand
 cls
@@ -400,6 +398,7 @@ pause >nul
 goto comand
 
 :startmenugif
+title OneOS
 color %themelod%
 ehco.
 cls
