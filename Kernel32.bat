@@ -335,13 +335,13 @@ goto login
 
 :login
 cls
-call Button 5 5 F0 "Login" X _Var_Box _Var_Hover
+call Button 5 5 F0 "Login" 15 5 F0 "Close" X _Var_Box _Var_Hover
 GetInput /M %_Var_Box% /H %_Var_Hover%
 echo.
 echo.
 echo.
 echo.
-goto startmenugif
+goto startmenugif%errorlevel%
 
 :installupdate
 cls
@@ -372,7 +372,7 @@ echo.                     OneOS版本: %ver2%
 echo ========================================
 echo :start:                 %date%:
 set /p comand=
-if %comand% == start goto startmenugif
+if %comand% == start goto startmenugif1
 if %comand% == help goto help 
 if %comand% == logoutuser goto usrlogoff
 if %comand% == time goto time
@@ -397,7 +397,10 @@ echo 沒有這個指令！使用 [help]或者[start] 取得指令！
 pause >nul
 goto comand
 
-:startmenugif
+:startmenugif2
+goto loginmenu
+
+:startmenugif1
 title OneOS
 color %themelod%
 ehco.
