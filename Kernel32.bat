@@ -4,15 +4,108 @@ cls
 title OneOS
 cd ..\..\etc
 if NOT EXIST info.bat (goto setup) else (call sakosv3.bat)
+set button=C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\button.bat
+set getbutton=C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\GetInput.exe
 cls
-goto start
+if EXIST dev (goto fastboot) else (goto boot)
 
+:fastboot
+cd ..\OneOS\System32
+goto startmenu1
 ::=======================================================開機初始化
 
 :setup
+call ver.bat
+echo  OneOS V%ver% 安裝程式
+echo.
+echo.
+cd ..\OneOS\System32
+call Button 5 5 F0 "install Now" X _Var_Box _Var_Hover
+GetInput /M %_Var_Box% /H %_Var_Hover%
+timeout /t 1 >nul
+cls
+echo 安裝程式正在開啟...
+timeout /t 3 >Nul
+cls
+echo 合約條款 (更新於2023年3月2日)
+echo =============================
+echo 本系統未完成，此系統供嘗鮮
+echo 若您想體驗完整功能，
+echo 需要購買金鑰！
+echo =============================
+call Button 2 7 F0 "I Accpet" 16 7 F0 "I Reject" X _Var_Box _Var_Hover
+GetInput /M %_Var_Box% /H %_Var_Hover%
+goto rule%errorlevel%
+
+:rule1
+cls
+echo 正在安裝OneOS...
+timeout /t 1 >nul
+echo sget Command@1.0
+timeout /t 1 >nul
+echo Geting Command@1.0
+echo Download ing (1%)
+echo Download ing (35%)
+echo Download ing (40%)
+echo Download ing (60%)
+echo Download ing (73%)
+echo Download ing (88%)
+echo Download ing (96%)
+echo Download ing (100%)
+timeout /t 1 >nul
+echo done
+timeout /t 1 >nul
+echo install ing
+timeout /t 3 >nul
+echo done
+echo sget GUI@1.0
+timeout /t 1 >nul
+echo Geting GUI@1.0
+echo Download ing (1%)
+echo Download ing (35%)
+echo Download ing (40%)
+echo Download ing (60%)
+echo Download ing (73%)
+echo Download ing (88%)
+echo Download ing (96%)
+echo Download ing (100%)
+timeout /t 1 >nul
+echo done
+timeout /t 1 >nul
+echo install ing
+timeout /t 3 >nul
+echo done
+echo oobe /timeout 30
+echo sget oneosaddons
+echo Geting oneosaddons
+echo Download ing (1%)
+echo Download ing (35%)
+echo Download ing (40%)
+echo Download ing (60%)
+echo Download ing (73%)
+echo Download ing (88%)
+echo Download ing (96%)
+echo Download ing (100%)
+timeout /t 1 >nul
+echo done
+timeout /t 1 >nul
+echo install ing
+timeout /t 3 >nul
+echo done
+echo set oobe /l chinese
+timeout /t 30 >nul
+goto oobe
+
+:rule2
+cls
+cd ..\..\etc
+goto setup
+
+:oobe
+cd ..\..\etc
+cls
 timeout /t 1 >nul 2>nul
-color 17
-title OneOS 設置模式
+title OneOS OOBE
 echo =============行程==============
 echo *1.設定使用者
 echo  2.設定root密碼
@@ -131,7 +224,7 @@ exit
 
 ::=======================================================SETUPS
 
-:start
+:boot
 color 0F
 echo.   
 echo   %logo%
@@ -341,7 +434,7 @@ echo.
 echo.
 echo.
 echo.
-goto startmenugif%errorlevel%
+goto startmenu%errorlevel%
 
 :installupdate
 cls
@@ -357,6 +450,7 @@ del /F /Q UpdateDone.tmp
 goto loginmenu
 
 :comand
+color %themelod%
 cls
 echo.
 echo.
@@ -372,7 +466,7 @@ echo.                     OneOS版本: %ver2%
 echo ========================================
 echo :start:                 %date%:
 set /p comand=
-if %comand% == start goto startmenugif1
+if %comand% == start goto startmenu1
 if %comand% == help goto help 
 if %comand% == logoutuser goto usrlogoff
 if %comand% == time goto time
@@ -397,178 +491,84 @@ echo 沒有這個指令！使用 [help]或者[start] 取得指令！
 pause >nul
 goto comand
 
-:startmenugif2
+:startmenu2
 goto loginmenu
 
-:startmenugif1
+:startmenu1
+cls
 title OneOS
 color %themelod%
-ehco.
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-echo.                                 :輸入's:
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-echo.[desktop] [sexplorer] [gpuboost] :回到桌:
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-echo.[desktop] [sexplorer] [gpuboost] :回到桌:
-echo.                                 :面，或:
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-echo.[desktop] [sexplorer] [gpuboost] :回到桌:
-echo.                                 :面，或:
-echo.[8]                              :者輸入: 
-cls
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-echo.[desktop] [sexplorer] [gpuboost] :回到桌:
-echo.                                 :面，或:
-echo.[8]                              :者輸入: 
-echo.[Command Mode]                   :'deskt:
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-echo.[desktop] [sexplorer] [gpuboost] :回到桌:
-echo.                                 :面，或:
-echo.[8]                              :者輸入: 
-echo.[Command Mode]                   :'deskt:
-echo.                                 :op' 返:
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-echo.[desktop] [sexplorer] [gpuboost] :回到桌:
-echo.                                 :面，或:
-echo.[8]                              :者輸入: 
-echo.[Command Mode]                   :'deskt:
-echo.                                 :op' 返:
-echo.                                 :回桌面:
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[help] [pcinfo] [calc] [settings]:      :
-echo.                                 :輸入's:
-echo.[5]        [6]         [7]       :tart',:
-echo.[desktop] [sexplorer] [gpuboost] :回到桌:
-echo.                                 :面，或:
-echo.[8]                              :者輸入: 
-echo.[Command Mode]                   :'deskt:
-echo.                                 :op' 返:
-echo.                                 :回桌面:
-echo.                          [down] :      : 
-cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[Help] [PCinfo] [Calc] [Settings]:      :
-echo.                                 :輸入's:
-echo.[5]       [6]         [7]        :tart',:
-echo.[Desktop] [SExplorer] [GPUBoost] :回到桌:
-echo.                                 :面，或:
-echo.[8]                              :者輸入: 
-echo.[Command Mode]                   :'deskt:
-echo.                                 :op' 返:
-echo.                                 :回桌面:
-echo.                          [down] :      : 
-echo =========================================
-set /p comand=
-if %comand% == start goto comand
-if %comand% == 5 goto comand
-if %comand% == 1 goto help 
-if %comand% == logoutuser goto usrlogoff
-if %comand% == time goto time
-if %comand% == 2 goto thispc
-if %comand% == time goto time
-if %comand% == activation goto yactivation
-if %comand% == userinfo goto usrinfo
-if %comand% == useradd goto usradd
-if %comand% == drivemgr goto drivemgr
-if %comand% == unitro goto nitro
-if %comand% == notepad goto notepad
-if %comand% == 6 goto intexp
-if %comand% == 7 goto gbmc
-if %comand% == 4 goto cp
-if %comand% == 3 goto calc
-if %comand% == off goto poweroff
-if %comand% == reset goto powereset
-if %comand% == internet goto internet
-if %comand% == 8 goto command
-goto startmenu
+echo 開始======================================
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         : 
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         : 
+echo.                                         :
+echo ==========================================
+call %button% 0 2 F0 "Help" 9 2 F0 "PCinfo" 20 2 F0 "Calc" 29 2 F0 "Settings" 0 6 F0 "Desktop" 12 6 F0 "SExplorer" 26 6 F0 "SGPUBoost-X" 0 10 F0 "Command Mode" 18 10 F0 "Timer" 29 10 F0 "MenuDown" X _Var_Box _Var_Hover
+%getbutton% /M %_Var_Box% /H %_Var_Hover%
+goto start%errorlevel%
 
-:startmenu
+:startmenuii
 cls
-echo 開始===[off]=[reset]=[logoutuser]========
-echo.[1]    [2]      [3]    [4]       : help :
-echo.[Help] [PCinfo] [Calc] [Settings]:      :
-echo.                                 :輸入's:
-echo.[5]       [6]         [7]        :tart',:
-echo.[Desktop] [SExplorer] [GPUBoost] :回到桌:
-echo.                                 :面，或:
-echo.[8]                              :者輸入: 
-echo.[Command Mode]                   :'deskt:
-echo.                                 :op' 返:
-echo.                                 :回桌面:
-echo.                          [down] :      : 
-echo =========================================
-set /p comand=
-if %comand% == start goto comand
-if %comand% == 5 goto comand
-if %comand% == 1 goto help 
-if %comand% == logoutuser goto usrlogoff
-if %comand% == time goto time
-if %comand% == 2 goto thispc
-if %comand% == time goto time
-if %comand% == activation goto yactivation
-if %comand% == userinfo goto usrinfo
-if %comand% == useradd goto usradd
-if %comand% == drivemgr goto drivemgr
-if %comand% == unitro goto nitro
-if %comand% == notepad goto notepad
-if %comand% == 6 goto intexp
-if %comand% == 7 goto gbmc
-if %comand% == 4 goto cp
-if %comand% == 3 goto calc
-if %comand% == off goto poweroff
-if %comand% == reset goto powereset
-if %comand% == internet goto internet
-if %comand% == 8 goto command
-goto startmenu
+color %themelod%
+echo 開始======================================
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         : 
+echo.                                         :
+echo.                                         :
+echo.                                         :
+echo.                                         : 
+echo.                                         :
+echo ==========================================
+call %button% 31 10 F0 "MenuUp" X _Var_Box _Var_Hover
+%getbutton% /M %_Var_Box% /H %_Var_Hover%
+goto startii%errorlevel%
+
+:start1
+goto help
+
+:start2
+goto thispc
+
+:start3
+goto calc
+
+:start4
+goto cp
+
+:start5
+goto comand
+
+:start6
+goto intexp
+
+:start7
+goto gbmc
+
+:start8
+goto command
+
+:start9
+goto time
+
+:start10
+goto startmenuii
+
+:startii1
+goto startmenu1
 
 :command
 color 0a
@@ -582,7 +582,6 @@ if %comand% == help goto help
 if %comand% == logoutuser goto usrlogoff
 if %comand% == time goto time
 if %comand% == pcinfo goto thispc
-if %comand% == time goto time
 if %comand% == activation goto yactivation
 if %comand% == userinfo goto usrinfo
 if %comand% == useradd goto usradd
@@ -601,11 +600,13 @@ goto command
 ::=======================================================Systems
 
 :osver
+cls
 call osver.bat
 CD ..\OneOS\System32
 goto comand
 
 :time
+cls
 echo 現在日期是%date%；時間是%time%
 pause
 echo.
@@ -617,19 +618,11 @@ ehco.
 CD ..\OneOS\System32
 goto comand
 
-:update
-call update.bat
-cls
-pause
-CD C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\
-start Kernel32.bat
-exit
-S
 :help
 cd Commands
 start help.vbs
 cd ..
-goto comand
+goto command
 
 :yactivation
 cls
@@ -711,7 +704,7 @@ call cp.bat
 goto comand
 
 :calc
-call calc.bat
+start calc.PY
 goto comand
 
 :poweroff
