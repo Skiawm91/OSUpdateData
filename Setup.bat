@@ -13,6 +13,7 @@ echo.
 pause >nul
 del ver.bat
 del setup.bat
+del calc.bat
 start Kernel32.bat
 exit
 
