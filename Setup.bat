@@ -10,10 +10,9 @@ cd ..
 del NowUpdate.tmp
 echo temp > UpdateDone.tmp
 echo.
-pause >nul
+timeout /t 3 /NOBREAK >nul
 del ver.bat
 del setup.bat
-del calc.bat
 start Kernel32.bat
 exit
 
