@@ -534,7 +534,7 @@ goto loginmenu
 :installupdate
 cls
 cd SoftwareUpdate
-cd UpdateData
+cd OSUpdateData
 start Setup.bat
 exit
 

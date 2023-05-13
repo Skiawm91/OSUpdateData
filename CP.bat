@@ -388,7 +388,7 @@ cls
 md %rnd%
 cd %rnd%
 git clone https://github.com/Skiawm91/OSDUpdateInfo.git
-cd UpdateInfo
+cd OSUpdateInfo
 if EXIST %ver% (goto noupdate) else (goto cupdate)
 
 :noupdate
@@ -453,7 +453,7 @@ cd ..
 echo Temp > NowUpdate.tmp
 cd SoftwareUpdate
 git clone https://github.com/Skiawm91/OSUpdateData.git
-cd UpdateData
+cd OSUpdateData
 cls
 echo ========================================
 echo : 設定 - 系統 - OneOS Update         :x:
@@ -469,7 +469,6 @@ echo :                                      :
 echo ========================================
 echo :start:                 %date%:
 timeout /t 10 >nul 2>nul
-cd ..
 cd ..
 start Kernel32.bat
 exit
