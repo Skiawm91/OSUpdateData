@@ -1,5 +1,6 @@
 @echo off
 title OneOS 砞﹚
+color %themelod%
 goto cpmenu
 
 :cphelp
@@ -8,71 +9,113 @@ start cphelp.vbs
 goto cp
 
 :cpmenu
+if %themelod% == 07 (set buttonc=70) else (set buttonc=07)
+color %themelod%
 cls
-echo ========================================
-echo : 砞﹚                               :x:
-echo ========================================
-echo :                砞﹚                  :
-echo :                                      :
-echo :              [1] ╰参                :
-echo :              [2] て              :
-echo :                                      :
-echo :                                      :
-echo :                                      :
-echo :                                      :
-echo ========================================
-echo :start:                 %date%:
-set /p comand= 
-IF %comand% == 1 goto system
-IF %comand% == 2 goto theme
-IF %comand% == x goto cpexit
-goto cpmenu
+echo ===========================================
+echo : 砞﹚                                  :x:
+echo ===========================================
+echo :                  砞﹚                   :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo ===========================================
+echo :         :                               :
+echo :         :               %date% :
+echo :         :                               :
+call Button 1 13 %buttonc% "Start" 11 5 %buttonc% "System" 22 5 %buttonc% "Theme" 33 9 %buttonc% "Exit" X _Var_Box _Var_Hover
+%getbutton% /M %_Var_Box% /H %_Var_Hover%
+goto cpmenu%errorlevel%
+
+:cpmenu1
+set oscp=startmenu
+goto startmenu1
+
+:cpmenu2
+goto system
+
+:cpmenu3
+goto theme
+
+:cpmenu4
+set oscp=desktop
+goto comand
 
 :system
+if %themelod% == 07 (set buttonc=70) else (set buttonc=07)
+color %themelod%
 cls
-echo ========================================
-echo : 砞﹚ - ╰参                        :x:
-echo ========================================
-echo :[-]≌⌒                               :
-echo :             砞﹚ - ╰参              :
-echo :                                      :
-echo :           [1] 砞﹚BootMGR            :
-echo :           [2] 砞﹚GUI [BETA]         :
-echo :           [3] OneOS穝              :
-echo :                                      :
-echo :                                      :
-echo :                                      :
-echo ========================================
-echo :start:                 %date%:
-set /p comand=
-if %comand% == 1 goto bootmgr
-if %comand% == 2 goto setgui
-if %comand% == 3 goto update
-if %comand% == - goto cpmenu
-IF %comand% == x goto cpexit
-goto system
+echo ===========================================
+echo : 砞﹚ - ╰参                           :x:
+echo ===========================================
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo ===========================================
+echo :         :                               :
+echo :         :               %date% :
+echo :         :                               :
+call Button 1 13 %buttonc% "Start" 35 9 %buttonc% "<-" 1 4 %buttonc% "Set BootMGR" 1 8 %buttonc% "Update" X _Var_Box _Var_Hover
+%getbutton% /M %_Var_Box% /H %_Var_Hover%
+goto cpsystem%errorlevel%
+
+:cpsystem1
+set oscp=startmenu
+goto startmenu1
+
+:cpsystem2
+goto cpmenu
+
+:cpsystem3
+goto bootmgr
+
+:cpsystem4
+goto update
 
 :theme
+if %themelod% == 07 (set buttonc=70) else (set buttonc=07)
+color %themelod%
 cls
-echo ========================================
-echo : 砞﹚ - て                      :x:
-echo ========================================
-echo :[-]≌⌒                               :
-echo :             砞﹚ - て            :
-echo :                                      :
-echo :       [1] 砞﹚獹┪堵穞家Α         :
-echo :                                      :
-echo :                                      :
-echo :                                      :
-echo :                                      :
-echo :                                      :
-echo ========================================
-echo :start:                 %date%:
-set /p comand=
-if %comand% == 1 goto verlod
-if %comand% == - goto cpmenu
-IF %comand% == x goto cpexit
-goto system
+echo ===========================================
+echo : 砞﹚ - て                         :x:
+echo ===========================================
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo ===========================================
+echo :         :                               :
+echo :         :               %date% :
+echo :         :                               :
+call Button 1 13 %buttonc% "Start" 35 9 %buttonc% "<-" 1 4 %buttonc% "Set Display Mode" X _Var_Box _Var_Hover
+%getbutton% /M %_Var_Box% /H %_Var_Hover%
+goto cptheme%errorlevel%
+
+:cptheme1
+set oscp=startmenu
+goto startmenu1
+
+:cptheme2
+goto cpmenu
+
+:cptheme3
+goto lod2
 
 :verlod
 cd ..\..\etc
@@ -86,31 +129,45 @@ cd ..\OneOS\System32
 goto cantuse
 
 :lod2
+if %themelod% == 07 (set buttonc=70) else (set buttonc=07)
+color %themelod%
 cls
-echo ========================================
-echo : 砞﹚ - て - 砞﹚獹┪堵穞家Α :x:
-echo ========================================
-echo :[-]≌⌒                               :
-echo :             砞﹚ - て            :
-echo :                                      :
-echo :        [1] 獹家Α LightMode        :
-echo :        [2] 堵穞家Α DarkMode         :
-echo :                                      :
-echo :                                      :
-echo :                                      :
-echo :                                      :
-echo ========================================
-echo :start:                 %date%:
-set /p lod=
-if %lod% == 1 goto light
-if %lod% == 2 goto dark
-if %lod% == - goto theme
-if %lod% == x goto cpexit
-goto lod
+echo ===========================================
+echo : 砞﹚ - て - 砞﹚陪ボ家Α          :x:
+echo ===========================================
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo :                                         :
+echo ===========================================
+echo :         :                               :
+echo :         :               %date% :
+echo :         :                               :
+call Button 1 13 %buttonc% "Start" 35 9 %buttonc% "<-" 14 4 %buttonc% "Dark Mode" 14 8 %buttonc% "Light Mode" X _Var_Box _Var_Hover
+%getbutton% /M %_Var_Box% /H %_Var_Hover%
+goto cplod%errorlevel%
+
+:cplod1
+set oscp=startmenu
+goto startmenu1
+
+:cplod2
+goto theme
+
+:cplod3
+goto dark
+
+:cplod4
+goto light
 
 :light
 cd ..\..\etc
-echo set themelod=F0 > infothemelod.bat
+echo set themelod=70 > infothemelod.bat
 timeout /t 1 >nul 2 >nul
 call infothemelod.bat
 cd ..\OneOS\System32
@@ -119,7 +176,7 @@ goto lod2
 
 :dark
 cd ..\..\etc
-echo set themelod=0F > infothemelod.bat 
+echo set themelod=07 > infothemelod.bat 
 timeout /t 1 >nul 2 >nul
 call infothemelod.bat
 cd ..\OneOS\System32
@@ -219,6 +276,8 @@ timeout /t 2 >nul
 goto mgr
 
 :setos
+color 0F
+timeout /t 1 >nul
 call bootlist.bat
 cls
 echo BootMGR Mode
@@ -304,7 +363,7 @@ call rnd.bat
 cls
 md %rnd%
 cd %rnd%
-git clone https://github.com/Swarmed2674/UpdateInfo.git
+git clone https://github.com/Skiawm91/OSUpdateInfo.git
 cd UpdateInfo
 if EXIST %ver% (goto noupdate) else (goto scupdate)
 
@@ -316,7 +375,7 @@ call rnd.bat
 cls
 md %rnd%
 cd %rnd%
-git clone https://github.com/Swarmed2674/PVUpdateInfo.git
+git clone https://github.com/Skiawm91/OSPVUpdateInfo.git
 cd UpdateInfo
 if EXIST %ver% (goto noupdate) else (goto cupdatepv)
 
@@ -328,7 +387,7 @@ call rnd.bat
 cls
 md %rnd%
 cd %rnd%
-git clone https://github.com/Swarmed2674/DUpdateInfo.git
+git clone https://github.com/Skiawm91/OSDUpdateInfo.git
 cd UpdateInfo
 if EXIST %ver% (goto noupdate) else (goto cupdate)
 
@@ -348,7 +407,7 @@ echo :                                      :
 echo ========================================
 echo :start:                 %date%:
 pause >nul
-cd ..\..
+cd ..\..\..
 goto system
 
 :scupdate
@@ -393,7 +452,7 @@ cd ..
 cd ..
 echo Temp > NowUpdate.tmp
 cd SoftwareUpdate
-git clone https://github.com/Swarmed2674/UpdateData.git
+git clone https://github.com/Skiawm91/OSUpdateData.git
 cd UpdateData
 cls
 echo ========================================

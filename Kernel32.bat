@@ -1,18 +1,32 @@
-:(c) Sakura Inc. 版權所有，並保留一切權利
-cls
+::(c) Sakura Inc. 版權所有，並保留一切權利::
+
+::開發者說明(你不是開發者也能看)::
+
+::(棄用) 不代表消除，您仍可在經典模式使用::
+::(未使用) 也不代表消除，但很有可能會再次加入，好消息是您也可在經典模式使用::
+::(無法使用) 代表組件已經丟失，無法再使用，除非您可以找回丟失的組件::
+::如果您想要對特定地方執行編輯，您可以使用  Ctrl + F 來搜尋組件::
+
+::系統初始階段，啟動過程::
+
 @echo off
 title OneOS
-cd ..\..\etc
-if NOT EXIST info.bat (goto setup) else (call sakosv3.bat)
+::載入所有組件前先檢查是否正在進行更新::
+if exist NowUpdate.tmp (goto installupdate)
+::無更新，接著載入組件::
 set button=C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\button.bat
 set getbutton=C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\GetInput.exe
+set user1=NO
+set user2=NO
+cd ..\..\etc
+if NOT EXIST info.bat (goto setup) else (call sakosv3.bat)
 cls
 if EXIST dev (goto fastboot) else (goto boot)
 
 :fastboot
-cd ..\OneOS\System32
-goto startmenu1
-::=======================================================開機初始化
+goto loginmenu
+
+::安裝程式::
 
 :setup
 call ver.bat
@@ -27,19 +41,40 @@ cls
 echo 安裝程式正在開啟...
 timeout /t 3 >Nul
 cls
-echo 合約條款 (更新於2023年3月2日)
-echo =============================
+echo 合約條款 (更新於2023年4月16日)
+echo ======================================
 echo 本系統未完成，此系統供嘗鮮
-echo 若您想體驗完整功能，
+echo 如果您要使用本系統執行二創
+echo 請經過Sakura inc.內部人員的同意二創
+echo 如 Skiawm91#4429
+echo OneOS的功能有的繼承於SakuraOSv2
+echo 而SakuraOSv2可二創
+echo 所以您大可使用SakuraOSv2二創
+echo 如果您只想使用系統的話
+echo 請閱讀以下條款
+echo 當您遇到Bug，您可以提交
+echo 而您也必須遵守以下要求
+echo 1.您必須要有Windows_NT內核的Windows版本
+echo 2.您的系統也需要支援GIT，否則您無法更新
+echo 3.您必須安裝Git
+echo 還有，若您想體驗完整功能
 echo 需要購買金鑰！
-echo =============================
-call Button 2 7 F0 "I Accpet" 16 7 F0 "I Reject" X _Var_Box _Var_Hover
+echo ======================================
+call Button 13 19 F0 "I Accpet" 26 19 F0 "I Reject" X _Var_Box _Var_Hover
 GetInput /M %_Var_Box% /H %_Var_Hover%
 goto rule%errorlevel%
 
 :rule1
+if %OS% == Windows_NT (goto ruleok) else (goto errorrule)
+
+:errorrule
+echo This System Not Supported Your Computer
+pause >nul
+exit
+
+:ruleok
 cls
-echo 正在安裝OneOS...
+echo Installing OneOS...
 timeout /t 1 >nul
 echo sget Command@1.0
 timeout /t 1 >nul
@@ -75,7 +110,7 @@ timeout /t 1 >nul
 echo install ing
 timeout /t 3 >nul
 echo done
-echo oobe /timeout 30
+echo oobe /timeout 10
 echo sget oneosaddons
 echo Geting oneosaddons
 echo Download ing (1%)
@@ -93,7 +128,7 @@ echo install ing
 timeout /t 3 >nul
 echo done
 echo set oobe /l chinese
-timeout /t 30 >nul
+timeout /t 10 >nul
 goto oobe
 
 :rule2
@@ -101,7 +136,20 @@ cls
 cd ..\..\etc
 goto setup
 
+::OOBE階段::
+
 :oobe
+cd ..\OneOS\System32
+echo              Set User else Skip
+call Button 10 5 F0 "Create User" 26 5 F0 "Skip" X _Var_Box _Var_Hover
+GetInput /M %_Var_Box% /H %_Var_Hover%
+goto oobe%errorlevel%
+
+:oobe2
+cls
+goto moresetup2
+
+:oobe1
 cd ..\..\etc
 cls
 timeout /t 1 >nul 2>nul
@@ -222,12 +270,13 @@ cd ..
 start Kernel32.bat
 exit
 
-::=======================================================SETUPS
+::Boot引導::
 
 :boot
 color 0F
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo.     
@@ -236,7 +285,8 @@ echo.
 timeout /t 3 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     .
@@ -245,7 +295,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ..
@@ -254,7 +305,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ...
@@ -263,7 +315,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ....
@@ -272,7 +325,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     .
@@ -281,7 +335,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ..
@@ -290,7 +345,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ...
@@ -299,7 +355,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ....
@@ -308,7 +365,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     .
@@ -317,7 +375,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ..
@@ -326,7 +385,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ...
@@ -335,7 +395,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ....
@@ -344,7 +405,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     .
@@ -353,7 +415,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ..
@@ -362,7 +425,8 @@ echo.
 timeout /t 1 >nul 2>nul
 cls
 echo.   
-echo   %logo%
+echo.    %logo%
+echo.    %logoii%
 echo.
 echo.
 echo     ...
@@ -373,68 +437,99 @@ cls
 timeout /t 3 >nul 2>nul
 goto loginmenu
 
+::登入畫面::
+
 :loginmenu
+cd ..\OneOS\System32
+if %themelod% == 07 (set buttonc=70) else (set buttonc=07)
 color %themelod%
 cls
 echo.
 echo.
-echo 用戶[1] : %user1%
-echo 用戶[2] : %user2%
-echo 用戶[3] : %usradd1%
-echo 用戶[4] : %usradd2%
-echo 用戶[5] : %usradd3%
-echo ===================
-echo 公用用戶 : user
+echo.        選擇使用者
 echo.
 echo.
 echo.
-set /p usrnames=使用者名稱: 
-if %usrnames% == user goto comandwc
-if %usrnames% == %user1% goto usrpasswd
-if %usrnames% == %user2% goto usrpasswd
-if %usrnames% == %useradd1% goto usrpasswd
-if %usrnames% == %useradd2% goto usrpasswd
-if %usrnames% == %useradd3% goto usrpasswd
-goto loginmenu
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+call %button% 7 5 %buttonc% "%user1%" 9 9 %buttonc% "User" X _Var_Box _Var_Hover
+%getbutton% /M %_Var_Box% /H %_Var_Hover%
+goto login%errorlevel%
+
+:login1
+set lusr=%user1%
+goto usrpasswd
+
+:login2
+set lusr=User
+goto comandwc
 
 :usrpasswd
 cls
 echo.
 echo.
-echo 用戶[1] : %user1%
-echo 用戶[2] : %user2%
-echo 用戶[3] : %usradd1%
-echo 用戶[4] : %usradd2%
-echo 用戶[5] : %usradd3%
-echo ===================
-echo 公用用戶 : user
+echo.
+echo.
+echo.       輸入 %lusr%的密碼
 echo.
 echo.
 echo.
-set /p tpasswd=密碼: 
+echo.
+echo.
+echo.
+echo.
+set /p tpasswd=
 if %tpasswd% == %passwd1% goto comandwc
-if %tpasswd% == %passwd2% goto comandwc
-if %tpaddws% == %passwdadd1% goto comandwc
-if %tpasswd% == %passwdadd2% goto comandwc
-if %tpasswd% == %passwdadd3% goto comandwc
-echo error
-goto usrpasswd
+goto usrpasswd2
+
+:usrpasswd2
+cls
+echo.
+echo.
+echo.
+echo.
+echo.       輸入 %lusr%的密碼
+echo.
+echo.       [請核對密碼是否正確]
+echo.
+echo.
+echo.
+echo.
+echo.
+set /p tpasswd=
+if %tpasswd% == %passwd1% goto comandwc
+goto usrpasswd2
 
 :comandwc
-CD ..\OneOS\System32
-if EXIST NowUpdate.tmp (goto installupdate)
 if EXIST UpdateDone.tmp (goto delinstallfile)
 goto login
 
 :login
 cls
-call Button 5 5 F0 "Login" 15 5 F0 "Close" X _Var_Box _Var_Hover
-GetInput /M %_Var_Box% /H %_Var_Hover%
+echo.
+echo.
+echo.       Welcome %lusr%
 echo.
 echo.
 echo.
 echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+call %button% 5 5 F0 "Login" 15 5 F0 "Close" X _Var_Box _Var_Hover
+%getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto startmenu%errorlevel%
+
+:startmenu2
+goto loginmenu
+
+::更新組件::
 
 :installupdate
 cls
@@ -447,9 +542,12 @@ exit
 rmdir /S /Q SoftwareUpdate
 md SoftwareUpdate
 del /F /Q UpdateDone.tmp
-goto loginmenu
+goto startmenu1
+
+::桌面::
 
 :comand
+if %themelod% == 07 (set buttonc=70) else (set buttonc=07)
 color %themelod%
 cls
 echo.
@@ -457,46 +555,40 @@ echo.
 echo.
 echo.
 echo.
-echo.       如果指令輸錯，請按Enter繼續
+echo.
 echo.
 echo. 
 echo.
-echo.                     通道: %osdata%
-echo.                     OneOS版本: %ver2%
-echo ========================================
-echo :start:                 %date%:
-set /p comand=
-if %comand% == start goto startmenu1
-if %comand% == help goto help 
-if %comand% == logoutuser goto usrlogoff
-if %comand% == time goto time
-if %comand% == pcinfo goto thispc
-if %comand% == time goto time
-if %comand% == activation goto yactivation
-if %comand% == userinfo goto usrinfo
-if %comand% == useradd goto usradd
-if %comand% == drivemgr goto drivemgr
-if %comand% == unitro goto nitro
-if %comand% == notepad goto notepad
-if %comand% == sexplorer goto intexp
-if %comand% == gpuboost goto gbmc
-if %comand% == settings goto cp
-if %comand% == calc goto calc
-if %comand% == off goto poweroff
-if %comand% == reset goto powereset
-if %comand% == internet goto internet
-if %comand% == cmd goto command
 echo.
-echo 沒有這個指令！使用 [help]或者[start] 取得指令！
-pause >nul
-goto comand
+echo.
+echo.                           通道: %osdata%
+echo.                           OneOS版本: %ver2%
+echo ===========================================
+echo :         :                               :
+echo :         :               %date% :
+echo :         :                               :
+call Button 1 14 %buttonc% "Start" 1 1 %buttonc% "Logout" 1 5 %buttonc% "Restart" 1 9 %buttonc% "PowerOFF"  X _Var_Box _Var_Hover
+%getbutton% /M %_Var_Box% /H %_Var_Hover%
+goto desktop%errorlevel%
 
-:startmenu2
+:desktop1
+goto startmenu1
+
+:desktop2
 goto loginmenu
+
+:desktop3
+goto powereset
+
+:desktop4
+goto poweroff
+
+::開始菜單::
 
 :startmenu1
 cls
 title OneOS
+if %themelod% == 07 (set buttonc=70) else (set buttonc=07)
 color %themelod%
 echo 開始======================================
 echo.                                         :
@@ -512,9 +604,11 @@ echo.                                         :
 echo.                                         : 
 echo.                                         :
 echo ==========================================
-call %button% 0 2 F0 "Help" 9 2 F0 "PCinfo" 20 2 F0 "Calc" 29 2 F0 "Settings" 0 6 F0 "Desktop" 12 6 F0 "SExplorer" 26 6 F0 "SGPUBoost-X" 0 10 F0 "Command Mode" 18 10 F0 "Timer" 29 10 F0 "MenuDown" X _Var_Box _Var_Hover
+call %button% 0 2 %buttonc% "Help" 9 2 %buttonc% "PCinfo" 20 2 %buttonc% "Calc" 29 2 %buttonc% "Settings" 0 6 %buttonc% "Desktop" 12 6 %buttonc% "SExplorer" 26 6 %buttonc% "SGPUBoost-X" 0 10 %buttonc% "Command Mode" 17 10 %buttonc% " Time " 28 10 %buttonc% "Menu Down" X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto start%errorlevel%
+
+::開始菜單II::
 
 :startmenuii
 cls
@@ -533,9 +627,11 @@ echo.                                         :
 echo.                                         : 
 echo.                                         :
 echo ==========================================
-call %button% 31 10 F0 "MenuUp" X _Var_Box _Var_Hover
+call %button% 0 2 %buttonc% "NotePad" 31 10 %buttonc% "MenuUp" X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto startii%errorlevel%
+
+::開始菜單操作::
 
 :start1
 goto help
@@ -568,14 +664,20 @@ goto time
 goto startmenuii
 
 :startii1
+goto notepad
+
+:startii2
 goto startmenu1
+
+::OneOS經典模式::
 
 :command
 color 0a
 cls
-title OneOS (Command Mode)
+title OneOS (Classic Mode)
 echo 輸入 [help] 取得幫助
 echo.
+set comand=Baohau
 set /p comand=OneOS= 
 if %comand% == exit goto startmenugif
 if %comand% == help goto help 
@@ -595,28 +697,42 @@ if %comand% == calc goto calc
 if %comand% == off goto poweroff
 if %comand% == reset goto powereset
 if %comand% == internet goto internet
+if %comand% == cmd cmd
 goto command
 
 ::=======================================================Systems
+
+::系統版本(棄用)::
 
 :osver
 cls
 call osver.bat
 CD ..\OneOS\System32
-goto comand
+goto command
+
+::時間(棄用)::
 
 :time
 cls
 echo 現在日期是%date%；時間是%time%
 pause
 echo.
-goto comand
+goto command
+
+::關於系統::
 
 :thisPC
+cls
 call sysmgr.bat
-ehco.
-CD ..\OneOS\System32
+goto sysmgr%errorlevel%
+
+:sysmgr1
+goto startmenu1
+
+:sysmgr2
 goto comand
+
+::幫助中心(棄用)::
 
 :help
 cd Commands
@@ -624,17 +740,25 @@ start help.vbs
 cd ..
 goto command
 
+::啟用電腦(棄用)::
+
 :yactivation
 cls
 call activation.bat
-goto comand
+goto command
+
+::藍屏(棄用)::
 
 :bsod
 cd Commands 
 call BSOD.bat
 
+::登出(未使用)::
+
 :usrlogoff
 goto loginmenu
+
+::關於用戶(棄用)::
 
 :usrinfo
 echo User1: %user1%
@@ -644,17 +768,23 @@ echo user4: %usradd2%
 echo user5: %usradd3%
 Pause
 echo.
-goto comand
+goto command
+
+::裝置管理員(棄用)::
 
 :drivemgr
 call DrivesMGR.bat
 Pause
 echo.
-goto comand
+goto command
+
+::記事本::
 
 :notepad
 start NotePad.bat
 goto comand
+
+::內建網路瀏覽器::
 
 :intexp
 cd ..
@@ -668,7 +798,10 @@ cd OneOS
 cd System32
 goto comand
 
+::虛擬超頻::
+
 :gbmc
+cls
 title OneOS GPU Boost Max
 echo 超頻需要Pro版，檢測中...
 timeout /t 2 >nul 2>nul
@@ -679,12 +812,15 @@ if NOT EXIST pro.bat (goto nopro) else (goto gbm)
 cls
 echo 目前顯示卡有著 %random%Mhz
 echo.
-echo 超頻可隨機超
+echo        超頻可隨機超
+echo
 set /p chogbm=繼續(Y/N)? 
 if %chogbm% == Y goto gbm
 if %chogbm% == N goto exit
 cls
 goto gbm
+
+::沒有專業版::
 
 :nopro
 echo 需要Pro版！
@@ -694,24 +830,35 @@ echo.
 pause
 goto comand
 
+::離開(棄用)::
+
 :exit
 CD ..\OneOS\System32
 title OneOS
 goto comand
 
+::設定::
+
 :cp
 call cp.bat
-goto comand
+if %oscp% == startmenu (goto startmenu1)
+if %oscp% == desktop (goto comand)
+
+::計算機(無法使用)::
 
 :calc
-start calc.PY
+start calc.bat
 goto comand
+
+::關機::
 
 :poweroff
 cls
 echo 關機中...
 timeout 5 >nul 2>nul
 exit
+
+::重啟::
 
 :powereset
 cls
@@ -720,6 +867,8 @@ timeout 5 >nul 2>nul
 cd ..\..\..\..\..\..\
 start Open.bat
 exit
+
+::網路測試(棄用)::
 
 :internet
 echo OneOS正在連上伺服器...
@@ -732,14 +881,14 @@ md temp
 cd temp
 echo Thistemp > Tushistemp.txt
 cd ..
-goto comand
+goto command
 
 :link
 echo set rnd=internet%random%%random% > rnd.bat
 call rnd.bat
 md %rnd%
 cd %rnd%
-git clone https://github.com/Swarmed2674/Server.git
+git clone https://github.com/Skiawm91/IntTest.git
 cd server
 if NOT EXIST server.bat (goto errinternet) else (call server.bat)
 cls
@@ -749,7 +898,7 @@ cd ..
 cd ..
 cd ..
 pause
-goto comand
+goto command
 
 :errinternet
 echo 連線失敗！
@@ -757,8 +906,11 @@ cd ..
 cd ..
 cd ..
 pause
-goto comand
-::=======================================================System指令們
+goto command
+
+::System指令們::
+
+::增加用戶(無法使用)::
 
 :usradd
 cd Plugins
@@ -769,7 +921,10 @@ if %sl% == n goto comand
 echo 你確定你打對了嗎(y/n)
 goto bsod
 
+::取得隨機但不見得能用Nitro(未使用)::
+
 :nitro
+set pw=
 setlocal enabledelayedexpansion
 cls
 	set str=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
@@ -781,6 +936,6 @@ cls
 echo,&echo 您的未檢查隨機代碼為: https://discord.gift/!pw!
 echo.
 pause
-goto comand
+goto command
 
-::=======================================================Plugin指令
+::Plugin指令::
