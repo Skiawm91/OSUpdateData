@@ -6,7 +6,7 @@ echo : 系統執行代碼: %random%%random%
 echo : 電腦名稱: %home%           
 echo : 系統型號: OneOS            
 echo : 版本: %ver2%               
-echo : 組建: "%ver%"                
+echo : 組建: %ver%            
 echo : 通道: %osdata%             
 echo : 啟用狀態: %keys%           
 echo : 狀態: %copyorno%         

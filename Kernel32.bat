@@ -44,7 +44,7 @@ set root=root123
 set home="No Set Name"
 set keys=未啟用OS
 set copyorno=此系統沒有完成OOBE
-set channel=
+set channel=Official
 set oscp= 
 set oscpyu=false
 
@@ -78,7 +78,7 @@ set root=root123
 set home="No Set Name"
 set keys=未啟用OS
 set copyorno=此系統沒有完成OOBE
-set channel=1
+set channel=Official
 echo %user1%
 echo %user2%
 echo %passwd1%
@@ -601,7 +601,6 @@ goto loginmenu
 
 :installupdate
 cd ..\..\etc
-call info.bat
 cd ..\OneOS\System32
 cls
 cd SoftwareUpdate

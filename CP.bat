@@ -352,16 +352,16 @@ goto preupdate
 
 :update3
 cd ..\..\etc
-echo set channel=Dev>> info.bat
-call info.bat
+echo set channel=Dev>> config.bat
+call config.bat
 cd ..\OneOS\System32
 goto channelupdate
 
 :update4
 if sys%channel% == sysDev goto errdev
 cd ..\..\etc
-echo set channel=Beta>> info.bat
-call info.bat
+echo set channel=Beta>> config.bat
+call config.bat
 cd ..\OneOS\System32
 goto channelupdate
 
@@ -376,8 +376,8 @@ goto channelupdate
 if sys%channel% == sysDev goto errdev
 if sys%channel% == sysBeta goto errbeta
 cd ..\..\etc
-echo set channel=Official>> info.bat
-call info.bat
+echo set channel=Official>> config.bat
+call config.bat
 cd ..\OneOS\System32
 goto channelupdate
 
@@ -414,13 +414,13 @@ cd %rnd%
 %wget% https://github.com/Skiawm91/OSUpdateInfo/archive/refs/heads/main.zip
 ren main.zip OSUpdateInfo-main.zip
 C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\7za.exe e OSUpdateInfo-main.zip
-if EXIST "%ver%"_ (goto updates2) else (goto cupdate)
+if EXIST "%ver%"_%channel% (goto noupdate) else (goto updates2)
 
 :updates2
-if EXIST "%ver%"_%channel% (goto noupdate) else (goto cupdate)
+if EXIST "%ver%"_ (goto noupdate) else (goto cupdate)
 
 :noupdate
-if not %oscpyu% == true (cd ..\..\..)
+if not %oscpyu% == true (cd ..\..)
 cls
 echo ========================================
 echo :               系統設定              :
@@ -468,7 +468,7 @@ echo ========================================
 echo :        :                             :
 echo :        :             %date% :
 echo :        :                             :
-call %Button% 1 12 %buttonc% "Menu" 10 8 %buttonc% "Later" 20 8 %buttonc% "Install"  X _Var_Box _Var_Hover
+call %Button% 1 12 %buttonc% "Menu" 10 8 %buttonc% "Later" 20 8 %buttonc% "Install" X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto installnew%errorlevel%
 
