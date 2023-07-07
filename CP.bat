@@ -103,7 +103,7 @@ echo ===========================================
 echo :        :                                :
 echo :        :                %date% :
 echo :        :                                :
-call Button 1 13 %buttonc% "Start" 35 9 %buttonc% "<-" 1 4 %buttonc% "Set Display Mode" X _Var_Box _Var_Hover
+call Button 1 13 %buttonc% "Menu" 35 9 %buttonc% "<-" 1 4 %buttonc% "Set Display Mode" X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto cptheme%errorlevel%
 
@@ -148,7 +148,7 @@ echo ===========================================
 echo :        :                                :
 echo :        :                %date% :
 echo :        :                                :
-call Button 1 13 %buttonc% "Start" 35 9 %buttonc% "<-" 14 4 %buttonc% "Dark Mode" 14 8 %buttonc% "Light Mode" X _Var_Box _Var_Hover
+call Button 1 13 %buttonc% "Menu" 35 9 %buttonc% "<-" 14 4 %buttonc% "Dark Mode" 14 8 %buttonc% "Light Mode" X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto cplod%errorlevel%
 
@@ -169,7 +169,7 @@ goto light
 cd ..\..\etc
 echo set themelod=70 > themelod.bat
 timeout /t 1 >nul 2 >nul
-call infothemelod.bat
+call themelod.bat
 cd ..\OneOS\System32
 color %themelod%
 goto lod2
@@ -178,7 +178,7 @@ goto lod2
 cd ..\..\etc
 echo set themelod=07 > themelod.bat 
 timeout /t 1 >nul 2 >nul
-call infothemelod.bat
+call themelod.bat
 cd ..\OneOS\System32
 color %themelod%
 goto lod2
@@ -423,7 +423,7 @@ if EXIST "%ver%"_ (goto noupdate) else (goto cupdate)
 if not %oscpyu% == true (cd ..\..)
 cls
 echo ========================================
-echo :               ╰参砞﹚              :
+echo :               ╰参砞﹚               :
 echo ========================================
 echo :                                      :
 echo :                                      :
@@ -434,10 +434,10 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo :         :                            :
-echo :         :            %date% :
-echo :         :                            :
-call Button 1 12 %buttonc% "Start" 31 8 %buttonc% " OK " X _Var_Box _Var_Hover
+echo :        :                             :
+echo :        :             %date% :
+echo :        :                             :
+call Button 1 12 %buttonc% "Menu" 31 8 %buttonc% " OK " X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto noupdate%errorlevel%
 
@@ -454,7 +454,7 @@ goto startmenu1
 cd ..\..
 cls
 echo ========================================
-echo :               ╰参砞﹚              :
+echo :               ╰参砞﹚               :
 echo ========================================
 echo :                                      :
 echo :                                      :
