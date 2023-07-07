@@ -18,5 +18,9 @@ del setup.bat
 del seweb.bat
 del sakosv3.bat
 start Kernel32.bat
+cd ..
+cd ..
+cd etc
+if exist sakos.bat (del sakosv3.bat)
 exit
 
