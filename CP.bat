@@ -103,7 +103,7 @@ echo ===========================================
 echo :        :                                :
 echo :        :                %date% :
 echo :        :                                :
-call Button 1 13 %buttonc% "Menu" 35 9 %buttonc% "<-" 1 4 %buttonc% "Set Display Mode" X _Var_Box _Var_Hover
+call Button 1 13 %buttonc% "Start" 35 9 %buttonc% "<-" 1 4 %buttonc% "Set Display Mode" X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto cptheme%errorlevel%
 
@@ -148,7 +148,7 @@ echo ===========================================
 echo :        :                                :
 echo :        :                %date% :
 echo :        :                                :
-call Button 1 13 %buttonc% "Menu" 35 9 %buttonc% "<-" 14 4 %buttonc% "Dark Mode" 14 8 %buttonc% "Light Mode" X _Var_Box _Var_Hover
+call Button 1 13 %buttonc% "Start" 35 9 %buttonc% "<-" 14 4 %buttonc% "Dark Mode" 14 8 %buttonc% "Light Mode" X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto cplod%errorlevel%
 
@@ -169,7 +169,7 @@ goto light
 cd ..\..\etc
 echo set themelod=70 > themelod.bat
 timeout /t 1 >nul 2 >nul
-call themelod.bat
+call infothemelod.bat
 cd ..\OneOS\System32
 color %themelod%
 goto lod2
@@ -178,7 +178,7 @@ goto lod2
 cd ..\..\etc
 echo set themelod=07 > themelod.bat 
 timeout /t 1 >nul 2 >nul
-call themelod.bat
+call infothemelod.bat
 cd ..\OneOS\System32
 color %themelod%
 goto lod2
@@ -352,16 +352,16 @@ goto preupdate
 
 :update3
 cd ..\..\etc
-echo set channel=Dev>> config.bat
-call config.bat
+echo set channel=Dev>> info.bat
+call info.bat
 cd ..\OneOS\System32
 goto channelupdate
 
 :update4
 if sys%channel% == sysDev goto errdev
 cd ..\..\etc
-echo set channel=Beta>> config.bat
-call config.bat
+echo set channel=Beta>> info.bat
+call info.bat
 cd ..\OneOS\System32
 goto channelupdate
 
@@ -376,8 +376,8 @@ goto channelupdate
 if sys%channel% == sysDev goto errdev
 if sys%channel% == sysBeta goto errbeta
 cd ..\..\etc
-echo set channel=Official>> config.bat
-call config.bat
+echo set channel=Official>> info.bat
+call info.bat
 cd ..\OneOS\System32
 goto channelupdate
 
@@ -414,16 +414,16 @@ cd %rnd%
 %wget% https://github.com/Skiawm91/OSUpdateInfo/archive/refs/heads/main.zip
 ren main.zip OSUpdateInfo-main.zip
 C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\7za.exe e OSUpdateInfo-main.zip
-if EXIST "%ver%"_%channel% (goto noupdate) else (goto updates2)
+if EXIST "%ver%"_ (goto updates2) else (goto cupdate)
 
 :updates2
-if EXIST "%ver%"_ (goto noupdate) else (goto cupdate)
+if EXIST "%ver%"_%channel% (goto noupdate) else (goto cupdate)
 
 :noupdate
-if not %oscpyu% == true (cd ..\..)
+if not %oscpyu% == true (cd ..)
 cls
 echo ========================================
-echo :               ╰参砞﹚               :
+echo :               ╰参砞﹚              :
 echo ========================================
 echo :                                      :
 echo :                                      :
@@ -434,10 +434,10 @@ echo :                                      :
 echo :                                      :
 echo :                                      :
 echo ========================================
-echo :        :                             :
-echo :        :             %date% :
-echo :        :                             :
-call Button 1 12 %buttonc% "Menu" 31 8 %buttonc% " OK " X _Var_Box _Var_Hover
+echo :         :                            :
+echo :         :            %date% :
+echo :         :                            :
+call Button 1 12 %buttonc% "Start" 31 8 %buttonc% " OK " X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto noupdate%errorlevel%
 
@@ -454,7 +454,7 @@ goto startmenu1
 cd ..\..
 cls
 echo ========================================
-echo :               ╰参砞﹚               :
+echo :               ╰参砞﹚              :
 echo ========================================
 echo :                                      :
 echo :                                      :
@@ -468,7 +468,7 @@ echo ========================================
 echo :        :                             :
 echo :        :             %date% :
 echo :        :                             :
-call %Button% 1 12 %buttonc% "Menu" 10 8 %buttonc% "Later" 20 8 %buttonc% "Install" X _Var_Box _Var_Hover
+call %Button% 1 12 %buttonc% "Menu" 10 8 %buttonc% "Later" 20 8 %buttonc% "Install"  X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto installnew%errorlevel%
 
