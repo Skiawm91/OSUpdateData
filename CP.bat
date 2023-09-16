@@ -434,7 +434,6 @@ echo ========================================
 echo :         :                            :
 echo :         :            %date% :
 echo :         :                            :
-@echo on
 call Button 1 12 %buttonc% "Start" 31 8 %buttonc% " OK " X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto noupdate%errorlevel%
