@@ -417,7 +417,7 @@ C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\7za.exe e OSUpdateInfo-main
 if EXIST "%ver%"_%channel% (goto noupdate) else (goto cupdate)
 
 :noupdate
-if not %oscpyu% == true (cd ..\..\..)
+if not %oscpyu% == true (cd ..\..)
 cls
 echo ========================================
 echo :               系統設定              :
@@ -434,6 +434,7 @@ echo ========================================
 echo :         :                            :
 echo :         :            %date% :
 echo :         :                            :
+@echo on
 call Button 1 12 %buttonc% "Start" 31 8 %buttonc% " OK " X _Var_Box _Var_Hover
 %getbutton% /M %_Var_Box% /H %_Var_Hover%
 goto noupdate%errorlevel%
