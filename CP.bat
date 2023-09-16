@@ -417,7 +417,7 @@ C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\7za.exe e OSUpdateInfo-main
 if EXIST "%ver%"_%channel% (goto noupdate) else (goto cupdate)
 
 :noupdate
-if not %oscpyu% == true (cd ..\..\..) else (cd ..)
+if not %oscpyu% == true (cd ..\..\..)
 cls
 echo ========================================
 echo :               系統設定              :
