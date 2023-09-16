@@ -44,7 +44,7 @@ set root=root123
 set home="No Set Name"
 set keys=未啟用OS
 set copyorno=此系統沒有完成OOBE
-set channel=
+set channel=Official
 set oscp= 
 set oscpyu=false
 
