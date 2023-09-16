@@ -44,7 +44,7 @@ set root=root123
 set home="No Set Name"
 set keys=未啟用OS
 set copyorno=此系統沒有完成OOBE
-set channel=Official
+set channel=
 set oscp= 
 set oscpyu=false
 
@@ -78,7 +78,7 @@ set root=root123
 set home="No Set Name"
 set keys=未啟用OS
 set copyorno=此系統沒有完成OOBE
-set channel=Official
+set channel=1
 echo %user1%
 echo %user2%
 echo %passwd1%
@@ -333,7 +333,7 @@ goto start
 :reset
 cd ..\OneOS\System32
 cd Drivers
-echo set gpu=SkHol Basic Graphics 1000 > GPU.bat
+echo set gpu=SkHol Graphics > GPU.bat
 cd ..
 start Kernel32.bat
 exit
@@ -601,6 +601,7 @@ goto loginmenu
 
 :installupdate
 cd ..\..\etc
+call info.bat
 cd ..\OneOS\System32
 cls
 cd SoftwareUpdate
