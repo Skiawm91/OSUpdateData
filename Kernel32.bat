@@ -600,10 +600,6 @@ goto loginmenu
 ::更新組件::
 
 :installupdate
-cd ..\..\etc
-call info.bat
-cd ..\OneOS\System32
-cls
 cd SoftwareUpdate
 cd OSUpdateData
 start Setup.bat

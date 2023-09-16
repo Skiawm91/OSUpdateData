@@ -352,16 +352,16 @@ goto preupdate
 
 :update3
 cd ..\..\etc
-echo set channel=Dev>> info.bat
-call info.bat
+echo set channel=Dev>> config.bat
+call config.bat
 cd ..\OneOS\System32
 goto channelupdate
 
 :update4
 if sys%channel% == sysDev goto errdev
 cd ..\..\etc
-echo set channel=Beta>> info.bat
-call info.bat
+echo set channel=Beta>> Config.bat
+call config.bat
 cd ..\OneOS\System32
 goto channelupdate
 
