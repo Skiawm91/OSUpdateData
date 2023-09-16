@@ -420,7 +420,7 @@ if EXIST "%ver%"_ (goto updates2) else (goto cupdate)
 if EXIST "%ver%"_%channel% (goto noupdate) else (goto cupdate)
 
 :noupdate
-if not %oscpyu% == true (cd ..)
+if not %oscpyu% == true (cd ..\..\..) else (cd ..)
 cls
 echo ========================================
 echo :               系統設定              :
