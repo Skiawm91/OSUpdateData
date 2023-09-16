@@ -414,9 +414,6 @@ cd %rnd%
 %wget% https://github.com/Skiawm91/OSUpdateInfo/archive/refs/heads/main.zip
 ren main.zip OSUpdateInfo-main.zip
 C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\7za.exe e OSUpdateInfo-main.zip
-if EXIST "%ver%"_ (goto updates2) else (goto cupdate)
-
-:updates2
 if EXIST "%ver%"_%channel% (goto noupdate) else (goto cupdate)
 
 :noupdate
@@ -477,7 +474,7 @@ set oscp=startmenu
 goto startmenu1
 
 :installnew2
-set oscpyu=ture
+set oscpyu=true
 goto noupdate
 
 :installnew3
