@@ -376,7 +376,7 @@ goto channelupdate
 if sys%channel% == sysDev goto errdev
 if sys%channel% == sysBeta goto errbeta
 cd ..\..\etc
-echo set channel=Official>> info.bat
+echo set channel=Official>> config.bat
 call info.bat
 cd ..\OneOS\System32
 goto channelupdate
