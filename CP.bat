@@ -351,29 +351,16 @@ goto startmenu1
 goto preupdate
 
 :update3
-cd ..\..\etc
-echo set channel=Dev>> config.bat
-call config.bat
-cd ..\OneOS\System32
 goto channelupdate
 
 :update4
-if sys%channel% == sysDev goto errdev
 cd ..\..\etc
 echo set channel=Beta>> Config.bat
 call config.bat
 cd ..\OneOS\System32
 goto channelupdate
 
-:errdev
-cls
-echo 已經位於DEV通道了
-echo.
-pause
-goto channelupdate
-
 :update5
-if sys%channel% == sysDev goto errdev
 if sys%channel% == sysBeta goto errbeta
 cd ..\..\etc
 echo set channel=Official>> config.bat
@@ -414,7 +401,11 @@ cd %rnd%
 %wget% -q https://github.com/Skiawm91/OSUpdateInfo/archive/refs/heads/main.zip
 ren main.zip OSUpdateInfo-main.zip
 C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\7za.exe e OSUpdateInfo-main.zip
-if EXIST "%ver%"_%channel% (goto noupdate) else (goto cupdate)
+if sys%channel% == sysDev (goto noupdate)
+if EXIST "%ver%"_Official (goto noupdate) else (goto updates2)
+
+:updates2
+if EXIST "%ver%"_Beta (goto noupdate) else (goto cupdate)
 
 :noupdate
 if not %oscpyu% == true (cd ..\..)
