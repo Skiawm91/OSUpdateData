@@ -95,7 +95,7 @@ goto oneos
 
 :setup
 call ver.bat
-echo  OneOS V%ver% 安裝程式
+echo  OneOS %ver% 安裝程式
 echo.
 echo.
 cd ..\OneOS\System32
@@ -106,27 +106,16 @@ cls
 echo 安裝程式正在開啟...
 timeout /t 3 >Nul
 cls
-echo 合約條款 (更新於2023年5月25日)
+echo 合約條款 (更新於2024年5月5日)
 echo =======================================
-echo 本系統未完成，此系統供嘗鮮
-echo 如果您要使用本系統執行二創
-echo 請經過Sakura inc.內部人員的同意二創
-echo 如 Skiawm91#4429
-echo OneOS的功能有的繼承於SakuraOSv2
-echo 而SakuraOSv2可二創
-echo 所以您大可使用SakuraOSv2二創
-echo 如果您只想使用系統的話
-echo 請閱讀以下條款
-echo 當您遇到Bug，您可以提交
-echo 而您也必須遵守以下要求
-echo 1.您必須要有Windows_NT內核的Windows版本
-echo 2.您的系統也需要支援GIT，否則您無法更新
-echo 3.您必須安裝Git
-echo 還有，若您想體驗完整功能
-echo 需要購買金鑰！
-echo 偷偷告訴內部員工，如果你罷工可能會被開除
+echo 該系統由Skiawm91打造，現由Thoy037維護
+echo 請閱讀以下系統要求
+echo.
+echo Sakura OneOS系統要求
+echo 1. Windows XP及更高版本
+echo 2. SakuraPC第一代
 echo =======================================
-call Button 14 20 F0 "I Accpet" 27 20 F0 "I Reject" X _Var_Box _Var_Hover
+call Button 14 9 F0 "I Accpet" 27 9 F0 "I Reject" X _Var_Box _Var_Hover
 GetInput /M %_Var_Box% /H %_Var_Hover%
 goto rule%errorlevel%
 
@@ -141,9 +130,9 @@ exit
 :ruleok
 cls
 echo Installing OneOS...
-timeout /t 1 >nul
+timeout /t 1 /nobreak >nul
 echo sget Command@1.0
-timeout /t 1 >nul
+timeout /t 1 /nobreak >nul
 echo Geting Command@1.0
 echo Download ing (1%)
 echo Download ing (35%)
@@ -153,14 +142,14 @@ echo Download ing (73%)
 echo Download ing (88%)
 echo Download ing (96%)
 echo Download ing (100%)
-timeout /t 1 >nul
+timeout /t 1 /nobreak >nul
 echo done
-timeout /t 1 >nul
+timeout /t 1 /nobreak >nul
 echo install ing
-timeout /t 3 >nul
+timeout /t 3 /nobreak >nul
 echo done
 echo sget GUI@1.0
-timeout /t 1 >nul
+timeout /t 1 /nobreak >nul
 echo Geting GUI@1.0
 echo Download ing (1%)
 echo Download ing (35%)
@@ -170,11 +159,11 @@ echo Download ing (73%)
 echo Download ing (88%)
 echo Download ing (96%)
 echo Download ing (100%)
-timeout /t 1 >nul
+timeout /t 1 /nobreak >nul
 echo done
-timeout /t 1 >nul
+timeout /t 1 /nobreak >nul
 echo install ing
-timeout /t 3 >nul
+timeout /t 3 /nobreak >nul
 echo done
 echo oobe /timeout 10
 echo sget oneosaddons
@@ -187,14 +176,14 @@ echo Download ing (73%)
 echo Download ing (88%)
 echo Download ing (96%)
 echo Download ing (100%)
-timeout /t 1 >nul
+timeout /t 1 /nobreak >nul
 echo done
-timeout /t 1 >nul
+timeout /t 1 /nobreak >nul
 echo install ing
-timeout /t 3 >nul
+timeout /t 3 /nobreak >nul
 echo done
 echo set oobe /l chinese
-timeout /t 10 >nul
+timeout /t ! /nobreak >nul
 goto oobe
 
 :rule2
@@ -205,6 +194,7 @@ goto setup
 ::OOBE階段::
 
 :oobe
+cls
 cd ..\OneOS\System32
 echo              Set User else Skip
 call Button 10 5 F0 "Create User" 26 5 F0 "Skip" X _Var_Box _Var_Hover
@@ -600,6 +590,10 @@ goto loginmenu
 ::更新組件::
 
 :installupdate
+cd ..\..\etc
+call info.bat
+cd ..\OneOS\System32
+cls
 cd SoftwareUpdate
 cd OSUpdateData
 start Setup.bat

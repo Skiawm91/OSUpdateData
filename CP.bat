@@ -411,7 +411,7 @@ cd temp
 set rnd=update%random%%random%
 md %rnd%
 cd %rnd%
-%wget% https://github.com/Skiawm91/OSUpdateInfo/archive/refs/heads/main.zip
+%wget% -q https://github.com/Skiawm91/OSUpdateInfo/archive/refs/heads/main.zip
 ren main.zip OSUpdateInfo-main.zip
 C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\7za.exe e OSUpdateInfo-main.zip
 if EXIST "%ver%"_%channel% (goto noupdate) else (goto cupdate)
@@ -507,7 +507,7 @@ echo Temp > NowUpdate.tmp
 cd SoftwareUpdate
 md OSUpdateData
 cd OSUpdateData
-if %channel% == Official (%wget% https://github.com/Skiawm91/OSUpdateData/archive/refs/heads/main.zip) else (%wget% https://github.com/Skiawm91/OS%channel%UpdateData/archive/refs/heads/main.zip)
+if %channel% == Official (%wget% -q https://github.com/Skiawm91/OSUpdateData/archive/refs/heads/main.zip) else (%wget% https://github.com/Skiawm91/OS%channel%UpdateData/archive/refs/heads/main.zip)
 if %channel% == Official (C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\7za.exe e main.zip) else (C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\7za.exe e main.zip)
 del main.zip
 cls
