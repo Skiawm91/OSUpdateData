@@ -7,16 +7,29 @@
 ::(無法使用) 代表組件已經丟失，無法再使用，除非您可以找回丟失的組件::
 ::如果您想要對特定地方執行編輯，您可以使用  Ctrl + F 來搜尋組件::
 
+::來自開發著Skiawm91的評論::
+
+::距離正式開發完成的3.00.1011已經非常久了，所以我TM把代碼全忘光了::
+::所以之後的3.00版本中不會再有大變動 (主要是我怕我一改系統就出錯)::
+::你要改也不是不行，反正我開放二創了，要改就改，不要的話另一位開發者Thoy037也會負責提供新版本的::
+::總之，我最後開發的3.00版本是3.00.1259，之後的版本均為二創，或者由Thoy037開發的官方版本::
+::感謝你看到這裡，4.00版本將會是一個很大的變動，基本上跟Kepre架構...... 還是有點關係 lol::
+
+::https://skiawm91.github.io/Sakura_Inc/Files/SakuraPC_V2.zip:: ::改SakuraPC後放到 C: 下::
+::https://skiawm91.github.io/Sakura_Inc/Files/Full_4.00.zip:: ::改FS1~10後放到 C:\SakuraPC\Systems\GPT 下::
+
+::Sakura Inc. - Skiawm91::
+
 ::你從命令行開？好喔::
 
 @echo off
 title DEBUG
 cls
-if "%~1" == "/fastboot" (goto fastboot)
-if "%~1" == "/v" (goto sidevariable)
-if "%~1" == "/echoon" (@echo on) 
-if "%~1" == "/setup" (goto presetup)
-if "%~1" == "/help" (goto prehelp)
+if "%~1" == "-fastboot" (goto fastboot)
+if "%~1" == "-v" (goto sidevariable)
+if "%~1" == "-echoon" (@echo on) 
+if "%~1" == "-setup" (goto presetup)
+if "%~1" == "-help" (goto prehelp)
 goto oneos
 
 :presetup
@@ -24,11 +37,11 @@ cd ..\..\etc
 goto setup
 
 :prehelp
-echo /fastboot
-echo /v
-echo /echoon
-echo /setup
-echo /help
+echo -fastboot
+echo -v
+echo -echoon
+echo -setup
+echo -help
 echo.
 cmd
 exit
