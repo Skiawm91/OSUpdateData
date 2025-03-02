@@ -5,7 +5,7 @@ cls
 echo Starting Update...
 copy /Y *.* C:\SakuraPC\Systems\GPT\OneOS\Storage\OneOS\System32\
 copy /Y ver.bat C:\SakuraPC\Systems\GPT\OneOS\Storage\etc\
-copy /Y sakosv3.bat C:\SakuraPC\Systems\GPT\OneOS\Storage\etc\
+copy /Y sakosv3.bat C:\SakuraPC\Systems\GPT\OneOS\Storage\etc\sakos.bat
 copy /Y seweb.bat C:\SakuraPC\Systems\GPT\OneOS\Storage\ProgramFiles\SExplorer\
 cd ..
 cd ..
